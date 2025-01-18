@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity @Data
@@ -18,7 +19,7 @@ public class Author {
     private String lastName;
 
     @ManyToMany(mappedBy = "authors")
-    private Set<Book> books;
+    private Set<Book> books = new HashSet<>();
 
 
 }
