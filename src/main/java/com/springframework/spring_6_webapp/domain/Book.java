@@ -1,5 +1,6 @@
 package com.springframework.spring_6_webapp.domain;
 
+
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -8,17 +9,19 @@ import java.util.Set;
 
 @Entity @Data
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class Author {
+public class Book {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @EqualsAndHashCode.Include
     private Long id;
-    private String firstName;
-    private String lastName;
+    private String title;
+    private String isbn;
 
-    @ManyToMany(mappedBy = "authors")
-    private Set<Book> books;
+    @ManyToMany
+    @JoinTable(name = "author_book", joinColumns = @JoinColumn(name = "book_id"),
+            inverseJoinColumns = @JoinColumn(name = "author_id"))
+    private Set<Author> authors;
 
 
 }
